@@ -54,7 +54,7 @@
   .lf-page {
     position: relative;
     width: 100%;
-    padding: 42px 14px;
+    padding: 8px 14px 8px;
     isolation: isolate;
   }
 
@@ -524,8 +524,57 @@
   .lf-rules li.random-glitch,
   .lf-num.random-glitch,
   .lf-code-box.random-glitch,
-  .lf-info-box.random-glitch {
+  .lf-info-box.random-glitch,
+  .lf-opening-alert.random-glitch {
     animation: lf-random-glitch 0.2s steps(2, end) 3;
+  }
+
+  .lf-opening-alert {
+    position: relative;
+    z-index: 3;
+    margin: 28px 34px 0;
+    padding: 18px 24px;
+    border-left: 4px solid var(--amber);
+    border-top: 1px solid rgba(247, 201, 72, 0.52);
+    border-right: 1px solid rgba(247, 201, 72, 0.22);
+    border-bottom: 1px solid rgba(247, 201, 72, 0.52);
+    background:
+      linear-gradient(90deg, rgba(247,201,72,0.18), rgba(73,234,255,0.055), transparent 72%),
+      rgba(12, 10, 2, 0.74);
+    box-shadow:
+      0 0 22px rgba(247,201,72,0.16),
+      inset 0 0 28px rgba(247,201,72,0.06);
+    color: #fff6c7;
+    font-family: var(--tech);
+    font-size: 21px;
+    line-height: 1.35;
+    letter-spacing: 0.10em;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow:
+      0 0 10px rgba(247,201,72,0.55),
+      0 0 22px rgba(73,234,255,0.22);
+  }
+
+  .lf-opening-alert::before {
+    content: "SAKUSEN.ACCESS.DATE";
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: rgba(247, 201, 72, 0.42);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .lf-opening-alert::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(247,201,72,0.8), transparent);
   }
 
   .lf-content {
@@ -1053,11 +1102,22 @@
 
   @media (max-width: 720px) {
     .lf-page {
-      padding: 18px 8px;
+      padding: 8px;
     }
 
     .lf-hero {
       padding: 58px 18px 46px;
+    }
+
+    .lf-opening-alert {
+      margin: 20px 18px 0;
+      padding: 16px 14px;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+    }
+
+    .lf-opening-alert::before {
+      display: none;
     }
 
     .lf-content {
@@ -1192,6 +1252,8 @@
     </h1>
   </header>
 
+  <div class="lf-opening-alert decrypt" data-text="ABRE SUS PUERTAS EL 01/07">ABRE SUS PUERTAS EL 01/07</div>
+
   <div class="lf-content">
     <section class="lf-section lf-intro">
       <p>El Laboratorio del Futuro, escondido entre la espesa arbolada del bosque y la nieve, es una misteriosa instalación científica que se alza a las afueras de la Ciudad del Futuro, en Baldimore. No muchos habitantes de la isla saben cuándo fue establecido, ni en qué consistía su propósito original, pero reconocen que, a día de hoy, alberga secretos que el mundo no está preparado para conocer. Este enigmático lugar es el origen de muchas leyendas, distribuidas de boca a boca a través de las generaciones, alimentando la fijación de la población general con respecto al mismo.</p>
@@ -1238,6 +1300,7 @@
         <li><span class="lf-num">6.</span>Debido a la duración extensa, es posible pausar el evento y culminarlo en otra instancia, siempre y cuando se mantenga dentro del período general del evento.</li>
         <li><span class="lf-num">6.1.</span>Pausar el evento y completarlo posteriormente concreta un descanso. Véase la mecánica para más información al respecto.</li>
         <li><span class="lf-num">7.</span>Durante el evento, la figura del narrador comprende la de un guía. Es necesario respetar sus indicaciones para poder disfrutar del evento correctamente.</li>
+        <li><span class="lf-num">8.</span>No es necesario estar anclado en Karakuri para participar, pero sí tener la isla descubierta.</li>
       </ol>
     </section>
 
@@ -1317,7 +1380,7 @@ PACIFISTA_WAKE::PENDING</span> </div>
   (function () {
     var chars = "01#%&$@<>[]{}+=-_/\\|XQZ░▒▓█";
     var decodeItems = Array.prototype.slice.call(document.querySelectorAll(".decrypt"));
-    var glitchItems = Array.prototype.slice.call(document.querySelectorAll(".decrypt, .glitch-surface, .lf-rules li, .lf-num, .lf-code-box, .lf-info-box"));
+    var glitchItems = Array.prototype.slice.call(document.querySelectorAll(".decrypt, .glitch-surface, .lf-rules li, .lf-num, .lf-code-box, .lf-info-box, .lf-opening-alert"));
 
     function decode(el, delay) {
       if (!el) return;
