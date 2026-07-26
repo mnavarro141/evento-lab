@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>El Laboratorio del Futuro — Consecuencias</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #d6e3e7;
+}
+
+/* FONDO EXTERIOR DEL POST ORIGINAL */
+.lab-stage {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 25px 0;
+    overflow: hidden;
+    background-image:
+        linear-gradient(
+            rgba(0, 12, 19, .05),
+            rgba(0, 8, 13, .14)
+        ),
+        url("https://i.gyazo.com/f81c68bf4d0414859c81648bbd00a952.png");
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-position: center top;
+}
+
+/* Oscurecimiento lateral */
+.lab-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 5, 10, .28) 0%,
+            transparent 17%,
+            transparent 83%,
+            rgba(0, 5, 10, .28) 100%
+        );
+}
+
+.lab-report {
+    position: relative;
+    z-index: 2;
+    width: 850px;
+    margin: 0 auto;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 78% 17%,
+            rgba(0, 221, 255, .10),
+            transparent 220px
+        ),
+        radial-gradient(
+            circle at 15% 70%,
+            rgba(0, 160, 190, .07),
+            transparent 260px
+        ),
+        linear-gradient(
+            180deg,
+            #071015 0%,
+            #03080b 50%,
+            #071014 100%
+        );
+    border: 2px solid #00d9ff;
+    box-shadow:
+        0 0 5px #00d9ff,
+        0 0 14px rgba(0, 217, 255, .78),
+        0 0 32px rgba(0, 217, 255, .38),
+        inset 0 0 18px rgba(0, 217, 255, .10),
+        inset 0 0 75px rgba(0, 0, 0, .95);
+}
+
+/* Cuadrícula técnica */
+.lab-report::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .22;
+    background-image:
+        linear-gradient(
+            rgba(46, 190, 220, .11) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(46, 190, 220, .11) 1px,
+            transparent 1px
+        );
+    background-size: 38px 38px;
+}
+
+/* Líneas de escaneo */
+.lab-report::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    opacity: .18;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 3px,
+            rgba(120, 220, 235, .10) 4px
+        );
+}
+
+/* Bordes superior e inferior */
+.system-edge {
+    position: relative;
+    z-index: 5;
+    height: 9px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            #34d3e8 12%,
+            #0b4c5a 35%,
+            #34d3e8 50%,
+            #0b4c5a 65%,
+            #34d3e8 88%,
+            transparent 100%
+        );
+    box-shadow:
+        0 0 7px rgba(53, 210, 232, .45),
+        0 0 16px rgba(53, 210, 232, .18);
+}
+
+.system-edge.bottom {
+    transform: rotate(180deg);
+}
+
+/* CABECERA */
+.lab-header {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    min-height: 265px;
+    overflow: hidden;
+    background: #020608;
+    border-bottom: 1px solid #285967;
+}
+
+.lab-header-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 265px;
+    object-fit: cover;
+}
+
+.lab-header-shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            transparent 40%,
+            rgba(2, 7, 10, .30) 68%,
+            #050c10 100%
+        );
+}
+
+/* Franjas glitch */
+.glitch-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    height: 3px;
+    opacity: .75;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #47e6f4 14%,
+            transparent 31%,
+            #47e6f4 53%,
+            transparent 71%,
+            #47e6f4 88%,
+            transparent
+        );
+    box-shadow:
+        0 0 8px rgba(71, 230, 244, .55);
+}
+
+.glitch-line.g1 {
+    top: 39px;
+    left: 11%;
+    right: 27%;
+}
+
+.glitch-line.g2 {
+    top: 157px;
+    left: 43%;
+    right: 7%;
+    height: 2px;
+}
+
+.glitch-line.g3 {
+    bottom: 24px;
+    left: 7%;
+    right: 52%;
+    height: 4px;
+}
+
+.report-identifier {
+    position: absolute;
+    right: 20px;
+    bottom: 17px;
+    z-index: 7;
+    padding: 8px 13px;
+    color: #a8f7ff;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    background: rgba(2, 10, 14, .84);
+    border-left: 3px solid #38d5e9;
+    border-top: 1px solid #266b77;
+    border-bottom: 1px solid #266b77;
+    box-shadow:
+        -10px 0 20px rgba(0, 0, 0, .50),
+        0 0 10px rgba(56, 213, 233, .12);
+}
+
+.report-identifier span {
+    color: #f0c65f;
+}
+
+/* ESTADO */
+.status-bar {
+    position: relative;
+    z-index: 4;
+    display: table;
+    width: calc(100% - 70px);
+    margin: 0 auto;
+    background: #071318;
+    border-top: 1px solid #28616e;
+    border-bottom: 1px solid #28616e;
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, .52),
+        inset 0 0 18px rgba(38, 163, 187, .07);
+}
+
+.status-cell {
+    display: table-cell;
+    padding: 11px 15px;
+    color: #8ea8af;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    border-right: 1px solid #173a43;
+}
+
+.status-cell:last-child {
+    border-right: 0;
+}
+
+.status-cell strong {
+    display: block;
+    margin-top: 3px;
+    color: #dceef1;
+    font-size: 14px;
+    letter-spacing: .7px;
+}
+
+.status-cell.alert strong {
+    color: #ff6f82;
+}
+
+.status-cell.active strong {
+    color: #70e8f4;
+}
+
+/* CONTENIDO */
+.lab-content {
+    position: relative;
+    z-index: 3;
+    width: 760px;
+    margin: 0 auto;
+    padding: 32px 0 42px;
+}
+
+.radar {
+    position: absolute;
+    top: 87px;
+    right: -185px;
+    width: 390px;
+    height: 390px;
+    z-index: 0;
+    border-radius: 50%;
+    opacity: .12;
+    border: 1px solid #42d8e8;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 49.7%,
+            #42d8e8 50%,
+            transparent 50.3%
+        ),
+        linear-gradient(
+            transparent 49.7%,
+            #42d8e8 50%,
+            transparent 50.3%
+        ),
+        repeating-radial-gradient(
+            circle,
+            transparent 0,
+            transparent 42px,
+            #42d8e8 43px,
+            transparent 44px
+        );
+}
+
+.radar::before {
+    content: "";
+    position: absolute;
+    inset: 50% 50% 50% 50%;
+    width: 49%;
+    height: 49%;
+    transform-origin: left top;
+    background:
+        linear-gradient(
+            30deg,
+            rgba(55, 226, 241, .36),
+            transparent 67%
+        );
+}
+
+.section-code {
+    margin-bottom: 7px;
+    color: #55dbe9;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.section-code::before {
+    content: "[ ";
+    color: #e6bb55;
+}
+
+.section-code::after {
+    content: " ]";
+    color: #e6bb55;
+}
+
+.section-title {
+    margin: 0;
+    color: #edf7f8;
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.section-title span {
+    color: #55dbe9;
+}
+
+/* INTRODUCCIÓN */
+.intro-panel {
+    position: relative;
+    margin-bottom: 22px;
+    padding: 24px 27px;
+    background:
+        linear-gradient(
+            115deg,
+            rgba(15, 35, 42, .95),
+            rgba(5, 13, 17, .97)
+        );
+    border-top: 1px solid #326773;
+    border-bottom: 1px solid #244b55;
+    border-left: 4px solid #41d3e4;
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, .50),
+        7px 8px 0 rgba(0, 0, 0, .22);
+}
+
+.intro-panel::before {
+    content: "ARCHIVO RECUPERADO";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 9px;
+    color: #7bdfe8;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.4px;
+    background: #0b2026;
+    border-left: 1px solid #2d6671;
+    border-bottom: 1px solid #2d6671;
+}
+
+.intro-panel p {
+    margin: 0 0 16px;
+    color: #bfd0d4;
+    font-size: 15px;
+    line-height: 1.75;
+    text-align: justify;
+}
+
+.intro-panel p:last-child {
+    margin-bottom: 0;
+}
+
+/* MENSAJE CENTRAL */
+.not-the-end {
+    position: relative;
+    margin: 23px 0 30px;
+    padding: 19px 20px;
+    overflow: hidden;
+    color: #e8f8fa;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 3px;
+    text-align: center;
+    text-transform: uppercase;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(29, 102, 117, .36) 16%,
+            rgba(166, 126, 36, .20) 50%,
+            rgba(29, 102, 117, .36) 84%,
+            transparent
+        );
+    border-top: 1px solid #325c66;
+    border-bottom: 1px solid #325c66;
+}
+
+.not-the-end::before,
+.not-the-end::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 105px;
+    height: 1px;
+    background: #42d7e7;
+    box-shadow:
+        0 0 7px rgba(66, 215, 231, .65);
+}
+
+.not-the-end::before {
+    left: 18px;
+}
+
+.not-the-end::after {
+    right: 18px;
+}
+
+/* DIVISORES */
+.tech-divider {
+    position: relative;
+    height: 16px;
+    margin: 25px 0;
+}
+
+.tech-divider::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #2e6975 15%,
+            #45d9e8 50%,
+            #2e6975 85%,
+            transparent
+        );
+    box-shadow:
+        0 0 5px rgba(69, 217, 232, .22);
+}
+
+.tech-divider::after {
+    display: none;
+}
+
+/* CONSECUENCIAS */
+.consequence-list {
+    margin-top: 18px;
+}
+
+.consequence {
+    display: table;
+    width: 100%;
+    margin-bottom: 10px;
+    background: rgba(7, 19, 24, .94);
+    border: 1px solid #214b55;
+    box-shadow:
+        inset 0 0 22px rgba(0, 0, 0, .44);
+}
+
+.consequence-number {
+    display: table-cell;
+    width: 66px;
+    padding: 15px 8px;
+    vertical-align: middle;
+    color: #58ddeb;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-align: center;
+    background:
+        linear-gradient(
+            135deg,
+            #102b33,
+            #07151a
+        );
+    border-right: 1px solid #2a5964;
+}
+
+.consequence-number small {
+    display: block;
+    margin-bottom: 2px;
+    color: #68888f;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.consequence-text {
+    display: table-cell;
+    padding: 14px 17px;
+    vertical-align: middle;
+    color: #bacbcf;
+    font-size: 14px;
+    line-height: 1.60;
+}
+
+.consequence.critical {
+    border-color: #6c2633;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(60, 12, 23, .30),
+            rgba(8, 18, 22, .96) 42%
+        );
+}
+
+.consequence.critical .consequence-number {
+    color: #ff7184;
+    border-right-color: #73303b;
+    background:
+        linear-gradient(
+            135deg,
+            #3a131c,
+            #170a0e
+        );
+}
+
+.consequence.critical .consequence-text {
+    color: #e3c2c8;
+}
+
+/* RECOMPENSAS */
+.reward-grid {
+    display: table;
+    width: 100%;
+    margin-top: 18px;
+    border-spacing: 9px 0;
+    table-layout: fixed;
+}
+
+.reward-card {
+    display: table-cell;
+    position: relative;
+    padding: 17px 16px 18px;
+    vertical-align: top;
+    background:
+        linear-gradient(
+            150deg,
+            rgba(12, 31, 37, .97),
+            rgba(4, 12, 16, .98)
+        );
+    border: 1px solid #234c55;
+    box-shadow:
+        inset 0 0 23px rgba(0, 0, 0, .46),
+        5px 6px 0 rgba(0, 0, 0, .19);
+}
+
+.reward-card::before {
+    display: none;
+}
+
+.reward-label {
+    color: #688a91;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.reward-title {
+    margin: 5px 0 10px;
+    color: #e1f2f4;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.reward-card p {
+    margin: 0;
+    color: #adbec2;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.reward-intro {
+    display: block;
+    margin-bottom: 6px;
+    color: #d9e8eb;
+    font-weight: bold;
+}
+
+.reward-value {
+    color: #72f1a7;
+    font-weight: bold;
+}
+
+.reward-material {
+    color: #77dce8;
+    font-weight: bold;
+}
+
+/* LOGRO */
+.achievement-shell {
+    position: relative;
+    margin-top: 27px;
+    padding: 13px;
+    background:
+        linear-gradient(
+            90deg,
+            #111d22,
+            #071014
+        );
+    border: 1px solid #2a5a65;
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, .38),
+        inset 0 0 20px rgba(28, 132, 151, .05);
+}
+
+.achievement-shell::before {
+    content: "ACHIEVEMENT DATA";
+    position: absolute;
+    top: -8px;
+    left: 17px;
+    padding: 3px 8px;
+    color: #9deff7;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.3px;
+    background: #081318;
+    border: 1px solid #2b6470;
+}
+
+.achievement {
+    display: table;
+    width: 100%;
+    background:
+        linear-gradient(
+            110deg,
+            rgba(13, 31, 37, .98),
+            rgba(4, 11, 14, .99)
+        );
+    border: 1px solid #203f47;
+}
+
+.achievement-image-cell {
+    display: table-cell;
+    width: 176px;
+    padding: 12px;
+    vertical-align: middle;
+    text-align: center;
+    background:
+        linear-gradient(
+            135deg,
+            #0d242b,
+            #040b0e
+        );
+    border-right: 1px solid #28515b;
+}
+
+.achievement-image-frame {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #4d8590;
+    box-shadow:
+        0 0 0 4px #071217,
+        0 0 14px rgba(64, 211, 229, .17);
+}
+
+.achievement-image-frame::before,
+.achievement-image-frame::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+}
+
+.achievement-image-frame::before {
+    top: 5px;
+    left: 5px;
+    border-top: 2px solid #54dce9;
+    border-left: 2px solid #54dce9;
+}
+
+.achievement-image-frame::after {
+    right: 5px;
+    bottom: 5px;
+    border-right: 2px solid #d8ad45;
+    border-bottom: 2px solid #d8ad45;
+}
+
+.achievement-image {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.achievement-info {
+    display: table-cell;
+    padding: 18px 21px;
+    vertical-align: middle;
+}
+
+.achievement-rank {
+    display: inline-block;
+    margin-bottom: 7px;
+    padding: 4px 8px;
+    color: #e4ebed;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    background:
+        linear-gradient(
+            180deg,
+            #758289,
+            #353f44
+        );
+    border: 1px solid #9ea8ad;
+}
+
+.achievement-title {
+    margin: 0 0 10px;
+    color: #eaf7f8;
+    font-size: 23px;
+    line-height: 1;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.achievement-description {
+    margin-bottom: 12px;
+    color: #aebfc3;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.achievement-data {
+    padding-top: 10px;
+    color: #97abb0;
+    font-size: 13px;
+    line-height: 1.65;
+    border-top: 1px solid #234a53;
+}
+
+.achievement-data b {
+    color: #d9e8eb;
+}
+
+.achievement-data .exp {
+    color: #72f1a7;
+    font-weight: bold;
+}
+
+/* SPOILER DEL CÓDIGO DEL LOGRO */
+.achievement-code-area {
+    position: relative;
+    margin-top: 15px;
+}
+
+.achievement-code-spoiler {
+    position: relative;
+    color: #aebfc3;
+    background: rgba(4, 13, 17, .94);
+    border: 1px solid #285965;
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, .50),
+        0 4px 10px rgba(0, 0, 0, .25);
+}
+
+.achievement-code-spoiler[open] {
+    border-color: #3c8795;
+}
+
+.achievement-code-spoiler summary {
+    position: relative;
+    padding: 13px 43px 13px 16px;
+    cursor: pointer;
+    list-style: none;
+    color: #92edf5;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    background:
+        linear-gradient(
+            90deg,
+            #0b252c,
+            #061419
+        );
+    border-left: 3px solid #39d9e8;
+    user-select: none;
+}
+
+.achievement-code-spoiler summary::-webkit-details-marker {
+    display: none;
+}
+
+.achievement-code-spoiler summary::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    color: #f0c65f;
+    font-size: 20px;
+    line-height: 18px;
+    text-align: center;
+    border: 1px solid #937534;
+    background: #07171c;
+}
+
+.achievement-code-spoiler[open] summary::after {
+    content: "−";
+}
+
+.achievement-code-content {
+    padding: 14px;
+    border-top: 1px solid #214c56;
+}
+
+.achievement-code-note {
+    margin-bottom: 9px;
+    color: #78989f;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.achievement-code {
+    display: block;
+    width: 100%;
+    height: 310px;
+    padding: 14px;
+    resize: vertical;
+    outline: none;
+    overflow: auto;
+    color: #bdeaf0;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: pre;
+    background: #02090c;
+    border: 1px solid #1d4e59;
+    box-shadow:
+        inset 0 0 18px rgba(0, 0, 0, .80);
+}
+
+/* CIERRE */
+.final-system-message {
+    margin-top: 31px;
+    padding: 13px 16px;
+    color: #728d93;
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    text-align: center;
+    text-transform: uppercase;
+    background: rgba(4, 12, 15, .86);
+    border-top: 1px solid #244c55;
+    border-bottom: 1px solid #244c55;
+}
+
+.final-system-message strong {
+    color: #f0c65f;
+}
+
+.data-fragment {
+    position: absolute;
+    z-index: 1;
+    color: rgba(79, 216, 230, .16);
+    font-size: 10px;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    pointer-events: none;
+}
+
+.data-fragment.left {
+    top: 510px;
+    left: 10px;
+    transform: rotate(-90deg);
+}
+
+.data-fragment.right {
+    right: 8px;
+    bottom: 380px;
+    transform: rotate(90deg);
+}
+
+@media (max-width: 900px) {
+    .lab-stage {
+        padding: 18px 0;
+    }
+
+    .lab-report {
+        width: calc(100% - 30px);
+    }
+
+    .lab-content {
+        width: calc(100% - 70px);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="lab-stage">
+
+<div class="lab-report">
+
+    <div class="system-edge"></div>
+
+    <div class="lab-header">
+
+        <img
+            class="lab-header-image"
+            src="https://i.gyazo.com/9f08c41d989112a89d82617a41eff025.png"
+            alt="El Laboratorio del Futuro"
+        >
+
+        <div class="lab-header-shade"></div>
+
+        <div class="glitch-line g1"></div>
+        <div class="glitch-line g2"></div>
+        <div class="glitch-line g3"></div>
+
+        <div class="report-identifier">
+            Archivo de cierre //
+            <span>Consecuencias</span>
+        </div>
+
+    </div>
+
+    <div class="status-bar">
+
+        <div class="status-cell active">
+            Estado de la instalación
+            <strong>Acceso clausurado</strong>
+        </div>
+
+        <div class="status-cell">
+            Incursión pirata
+            <strong>Finalizada</strong>
+        </div>
+
+        <div class="status-cell alert">
+            Umbral de seguridad
+            <strong>No superado</strong>
+        </div>
+
+    </div>
+
+    <div class="data-fragment left">
+        LAB_SYS // ERROR_0404 // SECURITY_LOCK
+    </div>
+
+    <div class="data-fragment right">
+        SUBJECTS_RETURNED // TEST_COMPLETE
+    </div>
+
+    <div class="lab-content">
+
+        <div class="radar"></div>
+
+        <div class="section-code">
+            Registro final del incidente
+        </div>
+
+        <h1 class="section-title">
+            Tras el <span>umbral</span>
+        </h1>
+
+        <div class="tech-divider"></div>
+
+        <div class="intro-panel">
+
+            <p>
+                Ese frío día soleado, distintas tripulaciones se adentraron en el
+                complejo científico y, aunque algunas tenían motivos diferentes,
+                todas coincidían en un mismo destino: llegar hasta el fondo de todo.
+                A medida que avanzaron, se encontraron con la extensa planta de una
+                instalación abandonada y detenida en el tiempo, aunque rebosante de
+                una vida muy distinta a la esperada. Entre pasillos oscuros, salones
+                abandonados y un brillante pero complicado sistema, los piratas se
+                dieron cuenta de que estaban ante la obra de alguien que pensaba de
+                manera diferente a los demás: aquel que había marcado un antes y un
+                después en la ciencia a través de su mero conocimiento.
+            </p>
+
+            <p>
+                Unos cayeron mucho antes de poder siquiera raspar la superficie,
+                pereciendo ante experimentos fallidos y sofisticados protocolos de
+                seguridad. Otros, por su parte, lograron ir más allá y alcanzar las
+                profundidades anteriores al umbral: el lugar que marcaba un antes y
+                un después en el oscuro misterio que rodeaba al científico tras el
+                laboratorio y a las propias instalaciones. Sin embargo, nadie fue
+                capaz de superar la macabra adversidad que impedía adentrarse hasta
+                el origen de todo: el tesoro oculto en las profundidades.
+            </p>
+
+            <p>
+                Habiendo sobrevivido a lo que se creía imposible de sobrevivir, ahora
+                se preguntan qué se esconde tras aquella puerta de seguridad y cuál
+                puede ser el propósito de la persona detrás de todo ello.
+            </p>
+
+        </div>
+
+        <div class="not-the-end">
+            Este no es el final.
+        </div>
+
+        <div class="section-code">
+            Alteraciones registradas
+        </div>
+
+        <h2 class="section-title">
+            Consecuencias
+        </h2>
+
+        <div class="consequence-list">
+
+            <div class="consequence">
+
+                <div class="consequence-number">
+                    <small>REG</small>
+                    01
+                </div>
+
+                <div class="consequence-text">
+                    El Laboratorio del Futuro cierra sus puertas. La seguridad
+                    alrededor del mismo ha aumentado de forma rígida, impidiendo el
+                    acercamiento por parte de terceros. Buena parte de la
+                    infraestructura exterior se encuentra comprometida tras soportar
+                    la acometida pirata.
+                </div>
+
+            </div>
+
+            <div class="consequence">
+
+                <div class="consequence-number">
+                    <small>REG</small>
+                    02
+                </div>
+
+                <div class="consequence-text">
+                    Los rumores respecto al misterio oculto dentro del laboratorio
+                    aumentan considerablemente. Algunas lenguas hablan de reactores
+                    de energía con una potencia descomunal, mientras que otras
+                    relatan el terrorífico cuento de un arma viviente que protege las
+                    instalaciones.
+                </div>
+
+            </div>
+
+            <div class="consequence critical">
+
+                <div class="consequence-number">
+                    <small>TEST</small>
+                    03
+                </div>
+
+                <div class="consequence-text">
+                    La prueba ha terminado con éxito.
+                    <strong>
+                        Nadie ha logrado superar satisfactoriamente el Evento Mundial.
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="tech-divider"></div>
+
+        <div class="section-code">
+            Protocolo de compensación
+        </div>
+
+        <h2 class="section-title">
+            Recompensas
+        </h2>
+
+        <div class="reward-grid">
+
+            <div class="reward-card">
+
+                <div class="reward-label">
+                    Participantes
+                </div>
+
+                <div class="reward-title">
+                    Recompensa individual
+                </div>
+
+                <p>
+                    Todos los participantes obtienen
+                    <span class="reward-value">300 EXP</span>,
+                    <span class="reward-value">
+                        200 INF afín a su facción
+                    </span>
+                    y <b>3 Requisitos de Combate</b>.
+                </p>
+
+            </div>
+
+            <div class="reward-card">
+
+                <div class="reward-label">
+                    Registro desbloqueado
+                </div>
+
+                <div class="reward-title">
+                    Nuevo logro
+                </div>
+
+                <p>
+                    Todos los participantes reciben el logro
+                    <b>«Más allá del umbral»</b>.
+                </p>
+
+            </div>
+
+            <div class="reward-card">
+
+                <div class="reward-label">
+                    Tripulaciones
+                </div>
+
+                <div class="reward-title">
+                    Recursos recuperados
+                </div>
+
+                <p>
+                    <span class="reward-intro">
+                        Todas las tripulaciones reciben:
+                    </span>
+
+                    <span class="reward-value">2.500.000 ฿</span><br>
+                    <span class="reward-material">Wapometal</span> x5<br>
+                    <span class="reward-material">Productos Químicos</span> x10<br>
+                    <span class="reward-material">Acero</span> x10
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="achievement-shell">
+
+            <div class="achievement">
+
+                <div class="achievement-image-cell">
+
+                    <div class="achievement-image-frame">
+
+                        <img
+                            class="achievement-image"
+                            src="https://i.imgur.com/pC1wJEt.png"
+                            alt="Más allá del umbral"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="achievement-info">
+
+                    <div class="achievement-rank">
+                        Logro de plata
+                    </div>
+
+                    <h3 class="achievement-title">
+                        Más allá del umbral
+                    </h3>
+
+                    <div class="achievement-description">
+                        Has atravesado todo obstáculo para adentrarte en las
+                        profundidades del misterioso laboratorio.
+                    </div>
+
+                    <div class="achievement-data">
+                        <b>· Logro:</b>
+<img
+    src="https://i.imgur.com/9TWYMtm.png"
+    alt="Plata"
+    title="Logro de Plata"
+    style="
+        display:inline-block;
+        width:20px;
+        height:20px;
+        margin-left:5px;
+        object-fit:contain;
+        vertical-align:middle;
+    "
+><br>
+                        <b>· Recompensa:</b>
+                        <span class="exp">+200 EXP</span><br>
+                        <b>· Condición:</b>
+                        Participar en el Evento Mundial A —
+                        El Laboratorio del Futuro.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="achievement-code-area">
+
+            <details class="achievement-code-spoiler">
+
+                <summary>
+                    Código del logro para copiar en la ficha
+                </summary>
+
+                <div class="achievement-code-content">
+
+                    <div class="achievement-code-note">
+                        Selecciona y copia el código completo para pegarlo directamente
+                        en la ficha del personaje.
+                    </div>
+
+<textarea
+    class="achievement-code"
+    readonly
+    spellcheck="false"
+    onclick="this.select();"
+    onfocus="this.select();"
+><table>
+
+<tr>
+<td><div style="width: 150px; height: 150px">[IMG=Logro-Mihawk1]https://i.imgur.com/pC1wJEt.png[/IMG]</div>
+<td><b>Más allá del umbral</b>
+<u>Descripción</u>: Has atravesado todo obstáculo para adentrarte en las profundidades del misterioso laboratorio.
+<b>· Logro:</b> :plata:
+<b>· Recompensa:</b> [color=green]+200 EXP[/color]
+<b>· Condición:</b> Participar en el Evento Mundial A - El Laboratorio del Futuro.
+</tr></tbody>
+
+</table></textarea>
+
+                </div>
+
+            </details>
+
+        </div>
+
+        <div class="final-system-message">
+            Informe concluido //
+            <strong>El laboratorio permanece sellado</strong>
+            // Fin del registro
+        </div>
+
+    </div>
+
+    <div class="system-edge bottom"></div>
+
+</div>
+
+</div>
+
+</body>
+</html>
